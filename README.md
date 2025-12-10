@@ -1,6 +1,10 @@
 # Description
 
-This repository is meant to serve as a general template for how to set up new repositories in the JogetOSS organization. 
+![diagram](https://user-images.githubusercontent.com/70784722/179912265-c328e997-b5c9-42ec-ae36-85bf3d5e957d.png)
+
+This process tool wrapper plugin executes process tool based on condition.
+
+See [documentation](https://dev.joget.org/community/display/marketplace/Conditional+Multi+Process+Tool+Plugin).
 
 # Getting Help
 
