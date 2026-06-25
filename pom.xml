@@ -4,7 +4,7 @@
     <groupId>org.joget.marketplace</groupId>
     <artifactId>conditional-process-tool</artifactId>
     <packaging>bundle</packaging>
-    <version>9.0.0</version>
+    <version>9.0.1</version>
     <name>conditional-process-tool</name>
     <url>http://www.joget.org</url>
     <build>

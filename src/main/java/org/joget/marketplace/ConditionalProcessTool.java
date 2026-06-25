@@ -1,13 +1,10 @@
 package org.joget.marketplace;
 
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
-import javax.script.ScriptEngineFactory;
 import org.joget.apps.app.model.AppDefinition;
 import org.joget.apps.app.service.AppPluginUtil;
 import org.joget.apps.app.service.AppUtil;
@@ -28,7 +25,7 @@ public class ConditionalProcessTool extends DefaultApplicationPlugin{
 
     @Override
     public String getVersion() {
-        return "9.0.0";
+        return "9.0.1";
     }
 
     @Override
@@ -86,28 +83,21 @@ public class ConditionalProcessTool extends DefaultApplicationPlugin{
         try{
             String condition = (String)properties.get("condition");
 
-            ScriptEngineFactory sef = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory(); 
-            ScriptEngine engine = sef.getScriptEngine();
-
-            //ScriptEngine engine = new ScriptEngineManager().getEngineByName("javascript");
-            ScriptContext context = engine.getContext();
-            StringWriter writer = new StringWriter();
-            context.setWriter(writer);
+            org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory sef = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory();
+            ScriptEngine engine = sef.getScriptEngine("--language=es6");
 
             if(debugMode){
-                LogUtil.info(getClass().getName(), "Evaluating " + condition + " : " + condition);
+                LogUtil.info(getClass().getName(), "Evaluating condition: " + condition);
             }
 
-            engine.eval("print(" + condition + ")");
-
-            String output = writer.toString();
-            output = output.trim();
+            Object evalResult = engine.eval(condition);
+            String output = (evalResult != null) ? evalResult.toString().trim() : "false";
 
             if(debugMode){
-                LogUtil.info(getClass().getName(), "Result " + condition + " : " + output);
+                LogUtil.info(getClass().getName(), "Result: " + output);
             }
 
-            if("true".equalsIgnoreCase((String)output)){
+            if("true".equalsIgnoreCase(output)){
                 //executes the process tool plugin
                 Object objProcessTool = properties.get("processTool");
                 if (objProcessTool != null && objProcessTool instanceof Map) {
@@ -142,14 +132,14 @@ public class ConditionalProcessTool extends DefaultApplicationPlugin{
                 }
             }
         }catch(Exception ex){
-            Logger.getLogger(ConditionalProcessTool.class.getName()).log(Level.SEVERE, null, ex);
+            LogUtil.error(getClass().getName(), ex, "Condition evaluation error");
         }
 
         if(delay > 0){
             try {
                 Thread.sleep(delay * 1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(ConditionalProcessTool.class.getName()).log(Level.SEVERE, null, ex);
+                LogUtil.info(getClass().getName(), "Sleep for  [" + delay + "] seconds.");
             }
         }
         
