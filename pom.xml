@@ -90,11 +90,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- Change plugin specific dependencies here -->
-        <dependency>
-            <groupId>org.openjdk.nashorn</groupId>
-            <artifactId>nashorn-core</artifactId>
-            <version>15.6</version>
-        </dependency>
         <!-- End change plugin specific dependencies here -->
     </dependencies>
     <distributionManagement>

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.script.ScriptEngine;
 import org.joget.apps.app.model.AppDefinition;
 import org.joget.apps.app.service.AppPluginUtil;
 import org.joget.apps.app.service.AppUtil;
@@ -83,14 +82,11 @@ public class ConditionalProcessTool extends DefaultApplicationPlugin{
         try{
             String condition = (String)properties.get("condition");
 
-            org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory sef = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory();
-            ScriptEngine engine = sef.getScriptEngine("--language=es6");
-
             if(debugMode){
                 LogUtil.info(getClass().getName(), "Evaluating condition: " + condition);
             }
 
-            Object evalResult = engine.eval(condition);
+            Object evalResult = AppPluginUtil.executeScript(condition, new HashMap());
             String output = (evalResult != null) ? evalResult.toString().trim() : "false";
 
             if(debugMode){
