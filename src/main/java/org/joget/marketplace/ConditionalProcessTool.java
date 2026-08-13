@@ -24,7 +24,7 @@ public class ConditionalProcessTool extends DefaultApplicationPlugin{
 
     @Override
     public String getVersion() {
-        return "9.0.1";
+        return "9.0.2";
     }
 
     @Override
