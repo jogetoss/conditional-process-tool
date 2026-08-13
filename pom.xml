@@ -4,7 +4,7 @@
     <groupId>org.joget.marketplace</groupId>
     <artifactId>conditional-process-tool</artifactId>
     <packaging>bundle</packaging>
-    <version>9.0.1</version>
+    <version>9.0.2</version>
     <name>conditional-process-tool</name>
     <url>http://www.joget.org</url>
     <build>
@@ -90,11 +90,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- Change plugin specific dependencies here -->
-        <dependency>
-            <groupId>org.openjdk.nashorn</groupId>
-            <artifactId>nashorn-core</artifactId>
-            <version>15.6</version>
-        </dependency>
         <!-- End change plugin specific dependencies here -->
     </dependencies>
     <distributionManagement>
