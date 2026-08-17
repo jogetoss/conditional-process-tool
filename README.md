@@ -4,7 +4,7 @@
 
 This process tool wrapper plugin executes process tool based on condition.
 
-See [documentation](https://dev.joget.org/community/display/marketplace/Conditional+Multi+Process+Tool+Plugin).
+See [documentation](https://kb.joget.org/jw/web/userview/jdocs/docs/marketplace/conditional-process-tool-plugin).
 
 # Getting Help
 
